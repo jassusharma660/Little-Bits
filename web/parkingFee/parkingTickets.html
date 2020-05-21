@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parking Fee Calculator</title>
+    <style>
+      body {
+        font-family: 'Arial';
+        background-color: #eee;
+      }
+      #main {
+        background-color: #fff;
+        padding: 2vw;
+        position: absolute;
+        top: 15%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 1vw;
+        box-shadow: 0 1vw 1vw rgba(0,0,0,0.1);
+      }
+      input {
+        width: 100%;
+        font-size: 1.2vw;
+        padding: 1vw 0.5vw;
+        box-sizing: border-box;
+        margin-bottom: 1.5vw;
+        font-weight: bold;
+        font-size: 2vw;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid #444;
+      }
+      input:disabled {
+        border-bottom: 2px solid #00ff00;
+        background-color: #00ff0040;
+      }
+      button {
+        float: right;
+        ouline: none;
+        border: none;
+        background-color: #444;
+        color: #fff;
+        padding: 0.6vw 1vw;
+        cursor: pointer;
+        margin-bottom: 1.5vw;
+      }
+      label {
+        font-weight: bold;
+      }
+    </style>
+    <script type="text/javascript">
+      var grandTotal = 0;
+      function calculateCharges(time) {
+        var fees = 0.5;
+        if(time<=3) {
+          grandTotal+=2;
+          return 2;
+        }
+        if(time>3) {
+          fees = 2+((time-3)*fees);
+          if(fees>10) fees = 10;
+          grandTotal+=fees;
+          return fees;
+        }
+      }
+
+      function calculate() {
+        fees = document.getElementById('fees').value = calculateCharges(time.value);
+        document.getElementById('time').value = '';
+        document.getElementById('total').value = grandTotal;
+      }
+    </script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Parking Fee Calculator</h1>
+      <label for="time">Time</label><br/>
+      <input type="number" id="time" placeholder="Enter time in hours"><br/>
+      <button onclick="calculate()">Calculate</button><br/>
+      <label for="fees">Current Fees</label><br/>
+      <input type="number" id="fees" placeholder="0.00" disabled><br/>
+      <label for="total">Total Collection</label><br/>
+      <input type="number" id="total" placeholder="0.00" disabled>
+    </div>
+  </body>
+</html>

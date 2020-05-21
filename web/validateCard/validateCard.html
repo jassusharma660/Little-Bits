@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Validate Card</title>
+    <style>
+      body {
+        background-color: #eee;
+        font-family: 'Arial';
+      }
+      h2 {
+        text-align: center;
+      }
+      form {
+        width: 30%;
+        margin: 2vw auto;
+        padding: 2vw;
+        background-color: #fff;
+      }
+      label {
+        margin-top: 1vw;
+        display: block;
+      }
+      input, select{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.5vw;
+        font-size: 1.1vw;
+      }
+      input[type="submit"] {
+        margin: 1vw 0;
+        width: inherit;
+      }
+      input[name="error"] {
+        border: none;
+        color: #fff;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form" method="post" onsubmit="return validateForm();">
+      <h2>Validate Credit Cards</h2>
+      <label for="card">Credit Card:</label>
+      <select name="card">
+        <option value="">select an option</option>
+        <option value="aex">American Express</option>
+        <option value="dic">Dinner Club</option>
+        <option value="dis">Discover</option>
+        <option value="jcb">JCB</option>
+        <option value="mac">MasterCard</option>
+        <option value="vis">Visa</option>
+      </select><br/>
+      <label for="number">Number:</label>
+      <input type="number" name="number" onkeyup="validateForm()"><br/>
+      <input type="submit" value="Validate">
+      <input type="text" name="error" disabled>
+    </form>
+    <script type="text/javascript">
+        var form = document.getElementById('form');
+        function validateForm() {
+          form.elements["error"].value="";
+          var card = form.elements["card"].value;
+          var num = form.elements["number"].value;
+          var exp="";
+          if(card!="" && num!="") {
+            switch (card) {
+              case "aex": exp=/(34|37)\d{13}$/; break;
+              case "dic": exp=/(30[0-5]\d{11}$)|(3[68]\d{12})$/; break;
+              case "dis": exp=/6011\d{12}$|65\d{14}$/; break;
+              case "jcb": exp=/((2131|1800)\d{11}$)|35\d{14}$/; break;
+              case "mac": exp=/5[1-5]\d{14}$/; break;
+              case "vis": exp=/4(\d{12}$|\d{15}$)/; break;
+            }
+            if(exp.test(num)) {
+              form.elements["error"].style.backgroundColor="#4caf50";
+              form.elements["error"].value="Valid!";
+            }
+            else {
+              form.elements["error"].style.backgroundColor="#f44336";
+              form.elements["error"].value="Invalid credit card number!";
+              }
+          }
+          return false;
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slide Show</title>
+    <style>
+      body {
+        font-family: 'Arial';
+        margin: 2vw;
+        background: #000;
+        color: #fff;
+      }
+      button {
+        border: 1px solid #777;
+        background: #000;
+        color: #fff;
+        padding: 0.5vw 2vw;
+        outline: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #444;
+      }
+      input {
+        border: 1px solid #fff;
+        background: none;
+        color: #fff;
+        padding: 0.5vw 2vw;
+      }
+
+      .slider_main {
+        height: 70vh;
+        width: 60%;
+        background: #000;
+        margin: 4vw auto;
+        overflow: hidden;
+      }
+      .slider_controls {
+        position: absolute;
+        width: 57.5vw;
+      }
+
+      .slider_controls button {
+        cursor: pointer;
+        background-color: rgba(0,0,0,0.2);
+        font-size: 4em;
+        color: rgba(255,255,255,0.5);
+        height: 70vh;
+        padding: 5vw;
+        text-align: center;
+        display: inline;
+        outline: none;
+        border: none;
+      }
+
+      .slider_controls button:hover {
+        background-color: rgba(255,255,255,0.1);
+        color: rgba(0,0,0,0.7);
+      }
+
+      .slider_controls button:nth-child(2) {
+        float: right;
+      }
+      .slider_images img{
+        width: 100%;
+      }
+
+    </style>
+  </head>
+  <body>
+	<div>Try image path 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg or any url.</div><br/>
+    <label for="url">Image Path</label>
+    <input type="text" id="url" placeholder="Enter the Image address">
+    <button onclick="addSlide()">Add Image</button>
+    <button onclick="slideShow(true)">START SlideShow</button>
+    <button onclick="slideShow(false)">STOP SlideShow</button>
+    <div class="slider_main">
+      <div class="slider_controls">
+        <button onclick="changeSlide(-1)">&#10094;</button>
+        <button onclick="changeSlide(+1)">&#10095;</button>
+      </div>
+      <div class="slider_images">
+        <img src="1.jpg" class="images"/>
+      </div>
+    </div>
+
+    <script>
+        var slide = 0;
+        var slideshow;
+        function addSlide() {
+          var url = document.getElementById("url");
+          if(url.value.length>0) {
+            var img = document.createElement("img");
+            img.src = url.value;
+            img.style.display = "none";
+            img.classList.add("images");
+            document.getElementsByClassName("slider_images")[0].append(img);
+            url.value="";
+          }
+        }
+        function changeSlide(action) {
+          var imgs = document.getElementsByClassName("images");
+
+          if(imgs.length==1) return;
+          slide+=action;
+
+          if(slide<0) slide=imgs.length-1;
+          if(slide>imgs.length-1) slide=0;
+
+          for(var i=0; i<imgs.length; i++)
+            imgs[i].style.display = "none";
+          imgs[slide].style.display = "inherit";
+        }
+
+        function slideShow(action) {
+          if(action) slideshow=setInterval(function(){changeSlide(+1);},2000);
+          else clearInterval(slideshow);
+        }
+
+    </script>
+  </body>
+</html>

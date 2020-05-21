@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Word Decoder</title>
+    <style>
+      body {
+        font-family: "Arial";
+        background-color: #efefef;
+      }
+      #gameIntro {
+        background: #fff;
+        padding: 3vw 3vw;
+        width: 30%;
+        text-align: center;
+        margin: 10% auto;
+        border-radius: 5px;
+        border: 0.2vw solid #000;
+        box-shadow: 0 1vw 1vw #0000001f;
+      }
+      #gameIntro button {
+        background: #009688;
+        color: #000;
+        width: 80%;
+        margin-top: 3vw;
+        border-radius: 5px;
+        border: 0.2vw solid #000;
+      }
+      #gameIntro button:hover {
+        box-shadow: 0 1vw 1vw #00000033;
+      }
+      #gameMain {
+        display: none;
+        margin: 4%;
+      }
+      #ques {
+        display: block;
+        box-sizing: border-box;
+        text-align: center;
+      }
+      #ans {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 2vw;
+        width: 50%;
+      }
+      #score, #question, #answer {
+        background: none;
+        border: none;
+        outline: none;
+        margin-bottom: 1vw;
+        box-sizing: border-box;
+      }
+      #score {
+        width: 6vw;
+        font-weight: bold;
+        font-size: 2vw;
+        text-align: center;
+      }
+      label[for="question"] {
+        font-weight: bold;
+        font-size: 3vw;
+        margin: auto;
+      }
+      #question {
+        color: #f44336;
+        text-align: center;
+        padding: 1vw;
+        margin: 4vw;
+        font-weight: bold;
+        font-size: 5vw;
+        letter-spacing: 1vw;
+      }
+      #answer {
+        border-bottom: 0.2vw solid #009688;
+        margin-top: 2vw;
+        font-weight: bold;
+        font-size: 3vw;
+        text-align: center;
+        width: 100%;
+      }
+      #answer:disabled {
+        background: #cce9e6;
+      }
+      button {
+        padding: 0.5vw 1vw;
+        font-size: 1.5vw;
+        font-weight: bold;
+        background-color: #eee;
+        border: none;
+        cursor: pointer;
+      }
+      #ans button {
+        border-radius: 5px;
+        background-color: #455861;
+        border: 0.3vw solid #000;
+        padding: 1vw 2vw;
+        font-size: 2vw;
+        float: right;
+        color: #fff;
+      }
+      #gameEnd {
+        display: none;
+      }
+      #scr {
+        display: block;
+        margin: 0 auto;
+        text-align: right;
+        font-size: 2vw;
+      }
+      #scr2 {
+        display: block;
+        margin: 0 auto;
+        font-size: 2vw;
+        text-align: center;
+      }
+      #scr2 input {
+        padding: 1vw 2vw;
+        border: none;
+        width: 5vw;
+        font-size: 2vw;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gameIntro">
+      <h1>Word Guess!!</h1>
+      <p>You will see a scrambled word. Your task is to guess the correct word. Click play to to start the game.</p>
+      <button onclick="startGame()">PLAY</button>
+    </div>
+    <div id="gameMain">
+      <span id="scr">
+        <label for="score">Score: </label>
+        <input type="text" value="0" id="score" disabled><br/>
+      </span>
+      <span id="ques">
+        <label for="question">Your word</label><br/>
+        <input type="text" id="question" disabled><br/>
+      </span>
+      <span id="ans">
+        <label for="answer">Guess the word!</label><br/>
+        <input type="text" id="answer" onkeyup="matchWord()"><br/>
+        <button onclick="game()">NEXT&rarr;</button>
+      </span>
+    </div>
+
+    <div id="gameEnd">
+      <span id="scr2">
+        <h1>Game Over</h1>
+        <label for="score">Score: </label>
+        <input type="text" value="0" id="finalScore" disabled><br/>
+        <h3>Reload to restart!!</h3>
+      </span>
+    </div>
+    <script type="text/javascript">
+
+      var words = ["CPU","KEYBOARD","MOUSE","INTERNET","WIFI","USB"];
+      var currentAns = "";
+
+      function scrambleWord(word) {
+        var input = document.getElementById("answer");
+        input.disabled = false;
+        input.value = "";
+        var newWord = "";
+        word = word.split("");
+        while(word.length>0)
+          newWord +=word.splice(Math.floor(Math.random()*word.length),1);
+        return newWord.toUpperCase();
+      }
+
+      function randomWord() {
+        var selectedIndex = Math.floor(Math.random()*words.length);
+        var currentAns = (words.splice(selectedIndex,1)).toString();
+        return currentAns.toUpperCase();
+      }
+
+      function matchWord() {
+        var input = document.getElementById("answer");
+        if(input.value.toUpperCase()==currentAns) {
+          input.disabled = true;
+          document.getElementById("score").value++;
+        }
+      }
+
+      function gameEnd() {
+        document.getElementById("finalScore").value = document.getElementById("score").value*10;
+        document.getElementById("gameMain").style.display = "none";
+        document.getElementById("gameEnd").style.display = "block";
+      }
+
+      function game() {
+        currentAns = randomWord();
+        if(currentAns=="")
+          gameEnd();
+        else {
+          var currentQues = scrambleWord(currentAns);
+          while(currentQues==currentAns)
+            currentQues = scrambleWord(currentAns);
+          document.getElementById("question").value = currentQues;
+        }
+      }
+
+      function startGame() {
+        document.getElementById("gameIntro").style.display = "none";
+        document.getElementById("gameMain").style.display = "block";
+        game();
+      }
+    </script>
+  </body>
+</html>

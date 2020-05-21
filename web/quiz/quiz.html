@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quiz</title>
+	  <script type="text/javascript" src="data.js"></script>
+    <style>
+      body {
+        font-family: 'Arial';
+        background: #eee;
+      }
+      h1 {
+        text-align: center;
+      }
+      button {
+        margin-top: 2vw;
+        background-color: #3f51b5;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 1vw 1vw rgba(0,0,0,0.1);
+        border-radius: 5px;
+        padding: 0.5vw 1vw;
+        border: none;
+      }
+      section {
+        box-shadow: 0 1vw 1vw rgba(0,0,0,0.1);
+        background: #fff;
+        padding: 5vw;
+        margin: 2vw auto;
+      }
+      .options {
+        cursor: pointer;
+        padding: 1vw 0.5vw;
+      }
+      .options:hover {
+        background: #eee;
+      }
+      #clockContainer {
+        float: right;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-align: right;
+      }
+      #clockContainer input{
+        background: none;
+        border: none;
+        font-size: 1em;
+        font-weight: bold;
+        width: 10%;
+        padding-right: 0.5vw;
+        text-align: right;
+        vertical-align: middle;
+      }
+      #quizInit {
+        display: block;
+        width: 60%;
+      }
+      #quizMain {
+        display: none;
+        width: 70%;
+      }
+      #quizEnd {
+        display: none;
+        width: 40%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quiz Time</h1>
+    <section id="quizInit">
+      <h3>Instruction:</h3>
+      <ul>
+        <li>All quesions are objective type only.</li>
+        <li>There will be four options for each question.</li>
+        <li>Response will only be taken only if you clicked next.</li>
+        <li>There is a 60sec timer for each question.</li>
+      </ul>
+      Click start quiz to start the test.<br/>
+      <button onclick="nextQues()">Start Quiz</button>
+    </section>
+    <section id="quizMain">
+      <span id="quesCount"></span>
+      <span id="clockContainer">
+        Timer:<input type="text" value="60" id="clock" disabled/>sec
+      </span>
+    	<form id="quizContainer" onsubmit="return false;">
+      	<h3 id="question"></h3>
+        <div class="options" onclick="checkRadio('op1')">
+          <input type="radio" name="answer" value="op1" class="option1">
+          <label id="option1">
+          </label>
+        </div>
+        <div class="options" onclick="checkRadio('op2')">
+          <input type="radio" name="answer" value="op2" class="option2">
+      		<label id="option2">
+          </label>
+        </div>
+        <div class="options" onclick="checkRadio('op3')">
+          <input type="radio" name="answer" value="op3" class="option3">
+      		<label id="option3">
+          </label>
+        </div>
+        <div class="options" onclick="checkRadio('op4')">
+          <input type="radio" name="answer" value="op4" class="option4">
+      		<label id="option4">
+          </label>
+        </div>
+    		<button onclick="nextQues()" id="submit">Next Question</button>
+    	</div>
+    </section>
+    <section id="quizEnd">
+      <h3>Succesfully submitted!</h3>
+      Your Total Score: <span id="score"></span>
+    </section>
+  	<script type="text/javascript">
+  		var quesNo = -1;
+      var score = 0;
+      var timer;
+      var clock = document.getElementById("clock");
+
+  		function nextQues() {
+        document.getElementById("quizInit").style.display = "none";
+        document.getElementById("quizMain").style.display = "block";
+        clock.value = 60;
+        clearInterval(timer);
+        var form = document.getElementById("quizContainer");
+
+        if(quesNo>-1) {
+          var answer = form.elements["answer"].value;
+          if(answer!='') {
+            if(answer==data.quiz[quesNo]["ans"])
+              score++;
+          }
+        }
+  			if(++quesNo<data.quiz.length){
+          for(var i=0; i<form.elements["answer"].length; i++)
+            form.elements["answer"][i].checked = false;
+          var title = "Question "+(quesNo+1)+" of "+data.quiz.length;
+          document.getElementsByTagName("title")[0].innerHTML = "Quiz | "+title;
+          document.getElementById("quesCount").innerHTML = title;
+    			document.getElementById("question").innerHTML = (quesNo+1)+". "+data.quiz[quesNo]["ques"];
+    			document.getElementById("option1").innerHTML = data.quiz[quesNo]["op1"];
+    			document.getElementById("option2").innerHTML = data.quiz[quesNo]["op2"];
+    			document.getElementById("option3").innerHTML = data.quiz[quesNo]["op3"];
+    			document.getElementById("option4").innerHTML = data.quiz[quesNo]["op4"];
+          if(quesNo==data.quiz.length-1)
+            document.getElementById("submit").innerHTML = "Submit";
+          timer = setInterval(updateClock,1000);
+        }
+        else {
+          document.getElementsByTagName("title")[0].innerHTML = "Quiz | Score";
+          document.getElementById("quizMain").style.display = "none";
+          document.getElementById("quizEnd").style.display = "block";
+          document.getElementById("score").innerHTML = score+"/"+quesNo;
+        }
+  		}
+
+      function updateClock() {
+        if(--clock.value<0) nextQues();
+      }
+
+      function checkRadio(op) {
+        switch (op) {
+          case "op1": op="option1";break;
+          case "op2": op="option2";break;
+          case "op3": op="option3";break;
+          case "op4": op="option4";break;
+          default: return;
+        }
+        document.getElementsByClassName(op)[0].checked = true;
+      }
+	</script>
+  </body>
+</html>

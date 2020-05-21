@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Resume Generator</title>
+    <script src="resumeGenerator.js"></script>
+    <link rel="stylesheet" href="resumeGenerator.css">
+  </head>
+  <body>
+    <section id="resume">
+      <section class="header">
+        <div class="left">
+          <span id="username"></span>
+          <span id="title"></span>
+        </div>
+        <div class="right">
+          <span id="phone" class="contacts"></span>
+          <span id="email" class="contacts"></span>
+        </div>
+      </section>
+
+      <section class="main">
+        <div class="left-main">
+          <article class="education">
+            <h1>education</h1>
+            <div id="education_content" class="content"></div>
+          </article>
+          <article class="skills">
+            <h1>skills</h1>
+            <div id="skills_content" class="content"></div>
+          </article>
+        </div>
+        <div class="right-main">
+          <article class="profile">
+            <h1>profile</h1>
+            <div id="profile_content" class="content"></div>
+          </article>
+          <article class="experience">
+            <h1>experience</h1>
+            <div id="experience_content" class="content"></div>
+          </article>
+        </div>
+      </section>
+
+    </section>
+
+    <section id="resume_form">
+      <h1>Resume Generator</h1>
+      <form action="" onsubmit="return false">
+        <label for="name">Full Name</label><br/>
+        <input type="text" id="form_name" placeholder="Your Full Name.." required><br/>
+
+        <label for="title">Profession's Title</label><br/>
+        <input type="text" id="form_title" placeholder="Designer,Developer.." required><br/>
+
+        <label for="phone">Mobile No.</label><br/>
+        <input type="text" id="form_phone" placeholder="+91-XXXXXXXXXX" required><br/>
+
+        <label for="email">Email</label><br/>
+        <input type="text" id="form_email" placeholder="yourname@website.com" required><br/>
+
+        <label for="education">Education</label><br/>
+        <ul id="education_preview"></ul>
+        <input id="form_education" placeholder="Add one by one..."></input>
+        <button onclick="addEducation()">Add</button><br/>
+
+        <label for="skills">Skills *Seperated by comma for multiple skills.</label><br/>
+        <input type="text" id="form_skills" placeholder="html,css,javascript..." required><br/>
+
+        <br/>
+
+        <label for="profile">Your Profile</label><br/>
+        <textarea rows="8" cols="80" id="form_profile" placeholder="Write something about you.." required></textarea><br
+
+        <label for="experience">Experience</label><br/>
+        <textarea rows="8" cols="80" id="form_experience" placeholder="Your past job experience.." required></textarea><br/>
+
+        <button type="submit" onclick="createResume()">Create Resume</button>
+      </form>
+    </section>
+  </body>
+</html>

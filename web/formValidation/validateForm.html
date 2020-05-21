@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Validate Form using JS</title>
+  <style>
+    body {
+      background-color: #eee;
+      font-family: 'Arial';
+    }
+    form {
+      background-color: #fff;
+      padding: 10vh 7vw;
+      margin: 5vw auto;
+      width: 50%;
+      box-sizing: border-box;
+    }
+    input, textarea {
+      width: 100%;
+      font-size: 1em;
+      padding: 0.5vw 1vw;
+      margin-bottom: 1vw;
+      box-sizing: border-box;
+    }
+    input[type="checkbox"] {
+      width: inherit;
+      cursor: pointer;
+    }
+    input[type="submit"] {
+      background-color: #444;
+      color: #fff;
+      border: none;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5vw;
+      font-size: 0.9em;
+    }
+    label[for="formTitle"] {
+      font-size: 2em;
+      text-align: center;
+      margin-bottom: 2vw;
+    }
+    label[for="sameAddr"] {
+      font-weight: normal;
+    }
+    label.error {
+      color: red;
+      margin: 1vw 0;
+    }
+  </style>
+</head>
+
+<body>
+  <form onchange="validateForm()" onsubmit="return validateForm();" method="post">
+    <label for="formTitle">Registration Form</label>
+    <label class="error"></label>
+    <label for="mobile">Mobile: +91-</label>
+    <input type="text" name="mobile" placeholder="xxxxxxxxxx" required>
+    <label for="regno">Registration Number</label>
+    <input type="text" name="regno" placeholder="Reg. No." required>
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="Full Name" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="username@domain.com">
+    <label for="taddr">Temporary Address</label>
+    <textarea name="tempAddr" rows="5"></textarea>
+    <label for="sameAddr">
+      <input type="checkbox" name="check" onclick="copyAddress()"> Permanent address same as Temporary address.
+    </label>
+    <label for="paddr">Permanent Address</label>
+    <textarea name="permaAddr" rows="5"></textarea>
+    <input type="submit" value="submit"/>
+  </form>
+
+  <script type="text/javascript">
+    var form = document.getElementsByTagName("form")[0];
+    var error = document.getElementsByClassName("error")[0];
+    function copyAddress() {
+      if(form.elements["check"].checked) {
+        form.elements["permaAddr"].value = form.elements["tempAddr"].value;
+        form.elements["permaAddr"].disabled = true;
+      }
+      else
+        form.elements["permaAddr"].disabled = false;
+    }
+    function validateForm() {
+      var mobile = /^[1-9]\d{9}$/;
+      var regno = /^[1-2][0-9](MCA|BCA)[0-9]{4}$/;
+      var name = /^\w\w{0,30}$/;
+      var email = /^([a-zA-Z0-9_\.])+@([a-zA-Z0-9\.])+([a-zA-Z]+)$/;
+      error.innerHTML = "";
+
+      if(mobile.test(form.elements["mobile"].value)) {
+        if(regno.test(form.elements["regno"].value)) {
+          if(name.test(form.elements["name"].value)) {
+            if(email.test(form.elements["email"].value)) {
+              return true;
+            }
+            else error.innerHTML = "Email is not valid!";
+          }
+          else error.innerHTML = "Name can only be alphabets and maximum 30 chars long.";
+        }
+        else error.innerHTML = "Registration number is invalid.";
+      }
+      else error.innerHTML = "Mobile Number must be 10 digts.";
+      return false;
+    }
+  </script>
+
+</body>
+
+</html>

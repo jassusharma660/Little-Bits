@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Greeting Designer</title>
+		<style>
+			body {
+				font-family: 'Arial';
+			}
+			#left_pane {
+				width: 30%;
+				display: inline-block;
+				padding: 1%;
+				float: left;
+			}
+
+			#right_pane {
+				width: 70vh;
+				height: 90vh;
+				display: inline-block;
+				padding: 1%;
+				border: 2px dashed #000;
+				float: left;
+				background: url('birthday.png') no-repeat;
+				background-size: contain;
+				background-position: left;
+				overflow: hidden;
+			}
+
+			select, input {
+				width: 80%;
+				height: 2vw;
+				font-size: 1em;
+			}
+
+			button {
+				width: 26%;
+				height: 2vw;
+			}
+
+			label {
+				font-weight: bold;
+				margin-top: 2vw;
+				display: block;
+			}
+
+			#artPos {height: 100%;}
+
+			#title {
+				font-size: 3em;
+				font-weight: bold;
+				text-align: center;
+				vertical-align: center;
+				margin: 5vw 1vw;
+				text-shadow: 0 0.8vw 1vw rgba(0,0,0,0.3);
+				word-wrap: break-word;
+			}
+
+		</style>
+	</head>
+	<body>
+		<section id="left_pane">
+			<h1>Designer Panel</h1>
+			<label for="art">Clipart</label><br/>
+			<select id="art" onchange="changeArt(this.value)">
+				<option value="birthday.png">Ballons</option>
+				<option value="hearts.png">hearts</option>
+				<option value="flower1.png">flower1</option>
+				<option value="flower2.png">flower2</option>
+			</select><br/>
+			<label for="art">Clipart Position</label><br/>
+			<button onclick="changeArtPos('left')">Left</button>
+			<button onclick="changeArtPos('center')">Center</button>
+			<button onclick="changeArtPos('right')">Right</button>
+
+			<label for="art">Wishes</label><br/>
+			<input type="text" placeholder="Enter your wishes here..." onkeyup="updateTitle(this.value)"/>
+
+			<label for="size">Size</label><br/>
+			<input type="range" min="3" max="8" step="0.1" value="3" onchange="changeTitleSize(this.value)"/>
+
+			<label for="art">Text Colour</label><br/>
+			<input type="color" onchange="changeTitleColor(this.value)"/>
+		</section>
+		<section id="right_pane">
+			<div id="title">Your Wishes Here</div>
+		</section>
+
+		<script>
+			function changeArt(art) {
+				document.getElementById("right_pane").style.backgroundImage="url("+art+")";
+			}
+
+			function changeArtPos(pos){
+				document.getElementById("right_pane").style.backgroundPosition=pos;
+			}
+			function updateTitle(text){
+				document.getElementById("title").innerHTML=text;
+			}
+			function changeTitleSize(size){
+				document.getElementById("title").style.fontSize=size+"em";
+			}
+			function changeTitleColor(color){
+				document.getElementById("title").style.color=color;
+			}
+		</script>
+  </body>
+</html>

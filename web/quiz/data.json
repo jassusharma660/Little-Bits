@@ -1,0 +1,17 @@
+data = {
+	quiz:[
+			{
+				'ques':'This is ques 1?',
+				'ans':'op1',
+				'op1':'option 1',
+				'op2':'option 2',
+				'op3':'option 3',
+				'op4':'option 4'
+			},
+			{
+				'ques':'When?',
+				'op1':'2',
+				'op2':'3'
+			}
+		]
+	}

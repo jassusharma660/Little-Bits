@@ -1,0 +1,195 @@
+body {
+  background-color: #eee;
+  font-family: "Calibri";
+}
+#resume {
+  display: none;
+  background-color: #eee;
+  width: 60vw;
+  margin: 2vw auto;
+  padding: 3vw;
+  box-sizing: border-box;
+  box-shadow: -1vw 2vw 34vw 0vw rgba(0,0,0,0.8);
+}
+
+.header {
+  height: 10vw;
+  border-bottom: 0.2vh solid rgba(0,0,0,0.3);
+}
+
+.header .left {
+  width: 60%;
+  display: inline-block;
+  height: 100%;
+}
+
+.header .right {
+  width: 35%;
+  display: inline-block;
+  height: 90%;
+}
+
+#username {
+  height: 40%;
+  font-size: 3vw;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: block;
+  overflow: hidden;
+}
+
+#title {
+  height: 30%;
+  margin-top: 1%;
+  font-size: 2vw;
+  display: block;
+  text-transform: capitalize;
+}
+
+.header .right .contacts {
+  display: block;
+  margin-top: 1vw;
+  font-size: 1.3vw;
+}
+
+.header .right .contacts:before {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  height: 2vw;
+  width: 2vw;
+  text-align: center;
+  margin-right: 1vw;
+  border-radius: 50%;
+}
+
+#phone:before{
+  content: '\1f57b';
+}
+
+#email:before{
+  content: '\2709';
+}
+
+#resume .main {
+  margin-top: 2vw;
+}
+#resume .main .left-main {
+  display: inline-block;
+  width: 35%;
+  border-right: 0.2vh solid rgba(0,0,0,0.3);
+  vertical-align: top;
+}
+
+#resume .main .right-main {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 2vw;
+  width: 60%;
+}
+
+#resume .main article .content{
+  border-bottom: 0.2vh solid rgba(0,0,0,0.3);
+  margin-right: 2vw;
+  padding-bottom: 2vw;
+  word-wrap: break-word;
+}
+
+#resume .main article h1{
+  text-transform: uppercase;
+  font-size: 1.3vw;
+  letter-spacing: 0.3vw;
+}
+
+#resume .main article .content ul{
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+#resume .main article .content ul li{
+  background-color: #ddd;
+  padding: 1.5vh;
+  margin: 1.5vh 0;
+  border-radius: 10px;
+}
+
+#resume_form {
+  background: #fff;
+  width: 40%;
+  margin: 2vw auto;
+  padding: 4vw 10vw;
+}
+
+#resume_form h1{
+  text-align: center;
+  font-size: 3vw;
+}
+
+#resume_form label{
+  font-weight: bold;
+}
+
+#resume_form input, #resume_form textarea{
+  outline: none;
+  background: #eee;
+  border: 1px solid #888;
+  padding: 0.5vw 1vw;
+  margin-bottom: 1vw;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#resume_form #form_education {
+  width: 89%;
+}
+
+#resume_form #form_education +button{
+  outline: none;
+  border: 1px solid #000;
+  background: #444;
+  color: #fff;
+  padding: 0.5vw 1vw;
+  margin-bottom: 1vw;
+  width: 10%;
+  cursor: pointer;
+}
+
+#resume_form #education_preview {
+  list-style-type: none;
+  width: 100%;
+  padding-inline-start: 0;
+}
+
+#resume_form #education_preview li{
+  padding: 1vw;
+  background: #fefefe;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+#resume_form #education_preview button{
+  outline: none;
+  border: 1px solid #000;
+  background: none;
+  cursor: pointer;
+  float: right;
+  border-radius: 10px;
+  text-align: center;
+}
+
+#resume_form #education_preview button::before{
+  content: '\2573';
+  font-size: 0.4vw;
+  vertical-align: middle;
+}
+
+#resume_form button[type="submit"]{
+  outline: none;
+  border: 1px solid #000;
+  background: #444;
+  color: #fff;
+  padding: 0.5vw 1vw;
+  margin-bottom: 1vw;
+  width: 10%;
+  cursor: pointer;
+  width: 100%;
+}
