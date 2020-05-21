@@ -9,10 +9,11 @@ Repository with small code snippets from my college assignments.
 </p>    
 
 ---    
-
-
+<br>
+   
 ## DEMO available     
-
+    
+    
 | Sr. No. | Assignment          | Link |
 |----|---------------------------|------------------------------------------------------------------------------------------------------------|
 | 1. | Resume Generator          | [view](https://jassusharma660.github.io/Little-Bits/web/resumeGenerator/resumeGenerator.html) |
@@ -23,3 +24,5 @@ Repository with small code snippets from my college assignments.
 | 6. | Slideshow                 | [view](https://jassusharma660.github.io/Little-Bits/web/slideshow/slideShow.html)             |
 | 7. | Credit Card Validator     | [view](https://jassusharma660.github.io/Little-Bits/web/validateCard/validateCard.html)       |
 | 8. | Word Game                 | [view](https://jassusharma660.github.io/Little-Bits/web/wordGame/wordGame.html)               |
+
+    
