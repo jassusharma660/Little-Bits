@@ -1,5 +1,5 @@
 <p>
-  <img align="left" width="15%" src="https://github.com/jassusharma660/Little-Bits/blob/master/guide/lilbits.png">   
+  <img align="left" width="15%" src="https://github.com/jassusharma660/Little-Bits/blob/master/guide/lilbits.png?raw=true">   
   
 # Little-Bits    
 
