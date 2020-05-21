@@ -6,7 +6,8 @@
 >[Open](https://jassusharma660.github.io/Little-Bits/)   
 
 Repository with small code snippets from my college assignments.
-</p>
+</p>    
+
 ---    
 
 
